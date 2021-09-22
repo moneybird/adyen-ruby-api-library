@@ -74,5 +74,27 @@ module Adyen
 
       @client.call_adyen_api(@service, action, {}, {}, @version)
     end
+
+    def create_document(request)
+      @client.call_adyen_api(@service, "documents", request, {}, @version)
+    end
+
+    def update_document(request, documentId)
+      action = { method: 'patch', url: "documents/" + documentId }
+
+      @client.call_adyen_api(@service, action, request, {}, @version)
+    end
+
+    def get_document(documentId)
+      action = { method: 'get', url: "documents/" + documentId }
+
+      @client.call_adyen_api(@service, action, {}, {}, @version)
+    end
+
+    def delete_document(documentId)
+      action = { method: 'delete', url: "documents/" + documentId }
+
+      @client.call_adyen_api(@service, action, {}, {}, @version)
+    end
   end
 end
