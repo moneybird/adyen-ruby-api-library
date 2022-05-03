@@ -16,7 +16,6 @@
         "street":"Another Street",
         "street2":"Another Building"
         },
-        "taxExempt":"false",
         "taxId":"101002749",
         "type":"privateCompany"},
   "type": "organization"
