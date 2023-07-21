@@ -1,12 +1,15 @@
+
 require_relative "service"
+require_relative 'transfers/transactions_api'
+require_relative 'transfers/transfers_api'
 
 module Adyen
   class Transfers < Service
-    attr_accessor :version
-    DEFAULT_VERSION = 3
+    attr_accessor :service, :version
 
+    DEFAULT_VERSION = 3
     def initialize(client, version = DEFAULT_VERSION)
-      @service = "Transfers"
+      @service = 'Transfers'
       @client = client
       @version = version
     end
@@ -25,6 +28,14 @@ module Adyen
 
     def create_transfer_request(request, headers = {})
       @client.call_adyen_api(@service, "transfers", request, headers, @version)
+    end
+
+    def transactions_api
+      @transactions_api ||= Adyen::TransactionsApi.new(@client, @version)
+    end
+
+    def transfers_api
+      @transfers_api ||= Adyen::TransfersApi.new(@client, @version)
     end
   end
 end
