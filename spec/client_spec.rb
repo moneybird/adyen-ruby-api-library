@@ -260,4 +260,22 @@ RSpec.describe Adyen do
       .to eq('https://terminal-api-test.adyen.com/connectedTerminals')
 
   end
+          
+  it 'checks the initialization of the terminal region' do
+    client = Adyen::Client.new(api_key: 'api_key', env: :test, terminal_region: 'eu')
+    expect(client.service_url('TerminalCloudAPI', 'connectedTerminals', nil))
+    .to eq('https://terminal-api-test-eu.adyen.com/connectedTerminals')
+  end
+
+  it 'checks the initialization of the terminal region set to nil per default' do
+    client = Adyen::Client.new(api_key: 'api_key', env: :test)
+    expect(client.service_url('TerminalCloudAPI', 'connectedTerminals', nil))
+    .to eq('https://terminal-api-test.adyen.com/connectedTerminals')
+  end
+
+  it 'checks the creation of PosMobile sessions url' do
+    client = Adyen::Client.new(api_key: 'api_key', env: :test)
+    expect(client.service_url('PosMobile', 'sessions', nil))
+      .to eq('https://checkout-test.adyen.com/checkout/possdk/sessions')
+  end
 end

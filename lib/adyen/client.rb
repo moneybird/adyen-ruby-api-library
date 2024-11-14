@@ -94,6 +94,9 @@ module Adyen
             "https://terminal-api-#{@env}.adyen.com"
           end
           supports_live_url_prefix = false
+        when 'PosMobile'
+          url = "https://checkout-#{@env}.adyen.com/checkout/possdk"
+          supports_live_url_prefix = false
         else
           raise ArgumentError, 'Invalid service specified'
         end
@@ -288,6 +291,10 @@ module Adyen
 
     def terminal_cloud_api
       @terminal_cloud_api ||= Adyen::TerminalCloudAPI.new(self)
+    end
+
+    def pos_mobile
+      @pos_mobile ||= Adyen::PosMobile.new(self)
     end
 
     private
