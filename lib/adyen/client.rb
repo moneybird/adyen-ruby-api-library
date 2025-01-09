@@ -69,7 +69,7 @@ module Adyen
         when 'PosTerminalManagement'
           url = "https://postfmapi-#{@env}.adyen.com/postfmapi/terminal"
           supports_live_url_prefix = false
-        when 'DataProtectionService', 'DisputesService'
+        when 'DataProtectionService', 'DisputeService'
           url = "https://ca-#{@env}.adyen.com/ca/services/#{service}"
           supports_live_url_prefix = false
         when "AccessControlServer"
